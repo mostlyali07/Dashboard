@@ -1,16 +1,19 @@
 import React from "react";
-import { Link, useNavigate, Router } from "react-router-dom";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
+import Login from "./Components/Login";
+import Signup from "./Components/Signup";
 
 const App = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   return (
-    <Router>
-      <h1>Home</h1>
-      <Link to={"/Login"}>Go To Login Page</Link>
-      <br />
-      <button onClick={() => navigate("/Login")}>Go To Signup Page</button>
-      <br />
-    </Router>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Signup />} />
+          <Route path="login" element={<Login />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 };
 export default App;
