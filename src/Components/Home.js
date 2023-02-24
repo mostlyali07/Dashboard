@@ -1,4 +1,5 @@
 import React from "react";
+import AuthDetails from "./AuthDetails";
 import Login from "./Login";
 
 const Home = () => {
@@ -6,6 +7,7 @@ const Home = () => {
     <>
       <h1>Home</h1>
       <Login />
+      <AuthDetails />
     </>
   );
 };

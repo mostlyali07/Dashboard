@@ -22,7 +22,7 @@ const Login = () => {
   }
   return (
     <>
-      <Form onSubmit={signIn}>
+      <form onSubmit={signIn}>
         <Input
           size="large"
           placeholder="Email Address"
@@ -52,7 +52,7 @@ const Login = () => {
         <Link to="/signup">Sign Up</Link>
         <br />
         {/* <button onClick={() => navigate("/login")}>Click Me</button> */}
-      </Form>
+      </form>
     </>
   );
 };
