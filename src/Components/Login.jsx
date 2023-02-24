@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { Link } from "react-router-dom";
 import { UserOutlined } from "@ant-design/icons";
-import { Input, Button, Form } from "antd";
+import { Input, Button } from "antd";
 import { auth } from "../firebase"
 
 const Login = () => {
@@ -23,30 +23,32 @@ const Login = () => {
   return (
     <>
       <form onSubmit={signIn}>
+        <label htmlFor="Email"><b>Email</b></label><br />
         <Input
           size="large"
           placeholder="Email Address"
           prefix={<UserOutlined />}
           style={{
-            width: 250,
+            width: 300,
           }}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <br />
         <br />
+        <label htmlFor="Password"><b>Password</b></label><br />
         <Input.Password
           size="large"
           placeholder="input password"
           style={{
-            width: 250,
+            width: 300,
           }}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
         <br />
         <br />
-        <button type="submit">Login</button>
+        <Button htmlType="submit">Login</Button>
         <br />
         <br />
         <Link to="/signup">Sign Up</Link>
