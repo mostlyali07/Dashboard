@@ -8,12 +8,10 @@ import { auth } from "../firebase"
 
 
 const LoginForm = () => {
-    // const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const signIn = (e) => {
-        //todo: signin
         e.preventDefault();
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {

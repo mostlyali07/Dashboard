@@ -16,7 +16,7 @@ const Signup = () => {
                             <AuthDetails />
                         </div>
                     </div>
-                    <div className="col-md-6 backImg">
+                    <div className="col-md-6 backImgTwo">
                         <div className="blurEffect">
 
                         </div>

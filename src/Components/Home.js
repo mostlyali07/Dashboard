@@ -2,6 +2,7 @@ import React from "react";
 import "./../App.css";
 import AuthDetails from "./AuthDetails";
 import LoginForm from "./LoginForm";
+import reviewSlides from "./reviewSlides";
 
 const Home = () => {
   return (
@@ -18,8 +19,10 @@ const Home = () => {
               <AuthDetails />
             </div>
           </div>
-          <div className="col-md-6 backImg">
-            <div className="blurEffect"></div>
+          <div className="col-md-6 backImg p-5">
+            <div className="blurEffect mt-5 p-5">
+              <reviewSlides />
+            </div>
           </div>
         </div>
       </div>
