@@ -1,30 +1,28 @@
 import React from "react";
 import "./../App.css";
 import AuthDetails from "./AuthDetails";
-import Login from "./Login";
+import LoginForm from "./LoginForm";
 
 const Home = () => {
   return (
     <>
-      {/* <div className="MainHome"> */}
       <div className="container-fluid">
         <div className="row">
           <div className="col-md-6 d-flex align-items-center justify-content-center">
             <div>
-              <h1><b>Welcome back</b></h1>
+              <h1>
+                <b>Welcome back</b>
+              </h1>
               <p>Welcome back! Please enter your details.</p>
-              <Login />
+              <LoginForm />
               <AuthDetails />
             </div>
           </div>
           <div className="col-md-6 backImg">
-            <div className="blurEffect">
-
-            </div>
+            <div className="blurEffect"></div>
           </div>
         </div>
       </div>
-      {/* </div> */}
     </>
   );
 };

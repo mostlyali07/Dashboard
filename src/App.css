@@ -1,11 +1,12 @@
 * {
   font-family: "Poppins", sans-serif !important;
 }
-.MainHome{
+.MainHome {
   height: 100vh;
   background-color: #fff;
 }
-.backImg{
+
+.backImg {
   background-image: url(./Images/page.jpg);
   height: 100vh;
   background-size: cover;

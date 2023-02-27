@@ -1,59 +1,29 @@
-import React, { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { Link } from "react-router-dom";
-import { UserOutlined } from "@ant-design/icons";
-import { Input, Button, Form } from "antd";
-import { auth } from "../firebase"
+import React from "react";
+import "./../App.css";
+import AuthDetails from "./AuthDetails";
+import SignupForm from "./SignupForm";
 
 const Signup = () => {
-  // const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+    return (
+        <>
+            <div className="container-fluid">
+                <div className="row">
+                    <div className="col-md-6 d-flex align-items-center justify-content-center">
+                        <div>
+                            <h1><b>Welcome back</b></h1>
+                            <p>Welcome back! Please enter your details.</p>
+                            <SignupForm />
+                            <AuthDetails />
+                        </div>
+                    </div>
+                    <div className="col-md-6 backImg">
+                        <div className="blurEffect">
 
-  const signUp = (e) => {
-    //todo: signin
-    e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        console.log(userCredential);
-      }).catch((error) => {
-        console.log(error);
-      })
-  }
-  return (
-    <>
-      <form onSubmit={signUp}>
-        <Input
-          size="large"
-          placeholder="Email Address"
-          prefix={<UserOutlined />}
-          style={{
-            width: 250,
-          }}
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <br />
-        <br />
-        <Input.Password
-          size="large"
-          placeholder="input password"
-          style={{
-            width: 250,
-          }}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <br />
-        <br />
-        <button type="submit">Signup</button>
-        <br />
-        <br />
-        <Link to="/login">Log In</Link>
-        <br />
-        {/* <button onClick={() => navigate("/login")}>Click Me</button> */}
-      </form>
-    </>
-  );
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
+    );
 };
 export default Signup;
