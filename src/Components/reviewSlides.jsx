@@ -1,13 +1,22 @@
 import React from 'react'
 import Slider from "react-slick";
+import "./../App.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const reviewSlides = () => {
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 1000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+
+  };
   return (
     <>
       <div className="App">
-        <Slider>
+        <Slider {...settings}>
           <div className="card">
             <div className="card-top">
               <p>
@@ -15,7 +24,7 @@ const reviewSlides = () => {
                 start every new project and can't
                 imagine working without it."
               </p>
-              <div>⭐⭐⭐⭐⭐</div>
+              <div className="text-align-left">⭐⭐⭐⭐⭐</div>
             </div>
             <div className="card-bottom">
               <h4>Andi Lane</h4>

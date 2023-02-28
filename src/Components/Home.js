@@ -20,7 +20,7 @@ const Home = () => {
             </div>
           </div>
           <div className="col-md-6 backImg p-5">
-            <div className="blurEffect mt-5 p-5">
+            <div className="blurEffect mt-5 px-5">
              <ReviewSlides />
             </div>
           </div>
