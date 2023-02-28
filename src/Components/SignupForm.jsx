@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { Link } from "react-router-dom";
 import { UserOutlined } from "@ant-design/icons";
-import { Input, Button, Form } from "antd";
+import { Input } from "antd";
 import { auth } from "../firebase"
 
 const Signup = () => {
@@ -23,7 +23,7 @@ const Signup = () => {
   return (
     <>
       <form onSubmit={signUp}>
-      <label htmlFor="Email"><b>Email</b></label><br />
+        <label htmlFor="Email"><b>Email</b></label><br />
         <Input
           size="large"
           placeholder="Email Address"

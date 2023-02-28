@@ -18,7 +18,7 @@ const Login = () => {
             </div>
           </div>
           <div className="col-md-6 backImg">
-            <div className="blurEffect">
+            <div className="blurEffect mt-5 p-5">
 
             </div>
           </div>

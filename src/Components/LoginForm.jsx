@@ -1,15 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import "./../App.css";
 import { Link } from "react-router-dom";
 import { UserOutlined } from "@ant-design/icons";
 import { Input, Button } from "antd";
-import { auth } from "../firebase"
+import { auth, providers } from "../firebase"
+import { signInWithPopup } from "firebase/auth";
+import MainDashboard from "./MainDashboard";
 
 
 const LoginForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [value, setValue] = useState("");
+
 
     const signIn = (e) => {
         e.preventDefault();
@@ -20,6 +24,15 @@ const LoginForm = () => {
                 console.log(error);
             })
     }
+    const handleClick = () => {
+        signInWithPopup(auth, providers).then((data) => {
+            setValue(data.user.email)
+            localStorage.setItem("email", data.user.email)
+        })
+    }
+    useEffect(() => {
+        setValue(localStorage.getItem("email"))
+    })
     return (
         <><form onSubmit={signIn}>
             <label htmlFor="Email"><b>Email</b></label><br />
@@ -52,7 +65,9 @@ const LoginForm = () => {
             <br />
             <Link to="/signup">Sign Up</Link>
             <br />
-            {/* <button onClick={() => navigate("/login")}>Click Me</button> */}
+            {value ? <MainDashboard /> :
+                <button onClick={handleClick}>Sign In With Google</button>
+            }
         </form></>
     )
 }
