@@ -35,3 +35,16 @@
   color: #fff;
   font-size: 28px;
 }
+.card-bottom h4{
+  font-size: 32px;
+  color: #fff;
+}
+.card-bottom h5{
+  font-size: 20px;
+  color: #fff;
+}
+.card-bottom h6{
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+}

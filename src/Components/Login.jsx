@@ -2,6 +2,7 @@ import React from "react";
 import "./../App.css";
 import AuthDetails from "./AuthDetails";
 import LoginForm from "./LoginForm";
+import ReviewSlides from "./ReviewSlides";
 
 const Login = () => {
   return (
@@ -18,9 +19,7 @@ const Login = () => {
             </div>
           </div>
           <div className="col-md-6 backImg">
-            <div className="blurEffect mt-5 p-5">
-
-            </div>
+          <ReviewSlides />
           </div>
         </div>
       </div>
