@@ -16,9 +16,10 @@ const AllProducts = () => {
                         <Modal
                             title="Add Product Details"
                             open={open}
-                            onOk={() => setOpen(false)}
+                            onOk={() => setOpen(true)}
                             onCancel={() => setOpen(false)}
                             width={600}
+                            okText="Submit"
                         >
                             <br />
                             <label htmlFor="text"><b>Product Title :</b></label><br />
