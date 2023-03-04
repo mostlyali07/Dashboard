@@ -1,6 +1,8 @@
 import { useState } from 'react';
 // import { UploadOutlined } from "@ant-design/icons"
-import { Button, Modal, Input, InputNumber, Upload } from 'antd';
+import { storage, fs } from '../firebase';
+import { ref } from "firebase/storage";
+import { Button, Modal } from 'antd';
 
 const AllProducts = () => {
     const [open, setOpen] = useState(false);
@@ -14,7 +16,6 @@ const AllProducts = () => {
 
     const [successMsg, setSuccessMsg] = useState('');
     const [uploadError, setUploadError] = useState('');
-    const { TextArea } = Input;
 
     const types = ["image/jpg", "image/jpeg", "image/png", "image/PNG"]
     const handleProductImg = (e) => {
@@ -35,8 +36,33 @@ const AllProducts = () => {
     }
     const handleAddProducts = (e) => {
         e.preventDefault();
-        console.log(title, description, price);
-        console.log(image);
+        // console.log(title, description, price);
+        // console.log(image);
+        const uploadTask = storage.ref(`product-images/${image.name}`).put(image)
+        uploadTask.on("state_changed", snapshot => {
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            console.log(progress);
+        }, error => setUploadError(error.message), () => {
+            storage.ref("product-images").child(image.name).getDownloadURL().then(url => {
+                fs.collection("Products").add({
+                    title,
+                    description,
+                    price: Number(price),
+                    url
+                }).then(() => {
+                    setSuccessMsg("Product Add Successfully")
+                    setTitle("");
+                    setDescription("");
+                    setPrice("");
+                    document.getElementById("formFile").value = "";
+                    setImageError("");
+                    setUploadError("");
+                    setTimeout(() => {
+                        setSuccessMsg("");
+                    }, 3000)
+                }).catch(error => setUploadError(error.message));
+            })
+        })
     }
     return (
         <>
@@ -57,14 +83,6 @@ const AllProducts = () => {
                                 {successMsg && <><br /><div className="error-msg">{successMsg}</div><br /></>}
                                 <br />
                                 <label htmlFor="text"><b>Product Title :</b></label><br />
-                                {/* <Input
-                                    size="large"
-                                    placeholder="Enter Product Title"
-                                    style={{
-                                        width: 300,
-                                    }}
-                                    rules={[{ required: true }]}
-                                /> */}
                                 <input
                                     required
                                     type="text"
@@ -75,7 +93,7 @@ const AllProducts = () => {
                                 <br />
                                 <br />
                                 <label htmlFor="text"><b>Product Description :</b></label><br />
-                                <textarea 
+                                <textarea
                                     className='form-control'
                                     rows={3}
                                     placeholder="Enter Product Description"
@@ -95,9 +113,6 @@ const AllProducts = () => {
                                 <br />
                                 <br />
                                 <label htmlFor="image"><b>Product Image :</b></label><br />
-                                {/* <Upload name="logo" action="/" listType="picture" onChange={handleProductImg}>
-                                    <Button icon={<UploadOutlined />}>Click to upload product image</Button>
-                                </Upload> */}
                                 <input className="form-control" type="file" id="formFile" onChange={handleProductImg} />
 
                                 {imageError && <><br /><div className="alert-danger p-2">{imageError}</div></>}
