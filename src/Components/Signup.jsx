@@ -2,7 +2,7 @@ import React from "react";
 import "./../App.css";
 import AuthDetails from "./AuthDetails";
 import SignupForm from "./SignupForm";
-import ReviewSlides from "./ReviewSlides";
+import ReviewSlides from "./RreviewSlides";
 
 const Signup = () => {
     return (

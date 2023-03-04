@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { UploadOutlined } from "@ant-design/icons"
+// import { UploadOutlined } from "@ant-design/icons"
 import { Button, Modal, Input, InputNumber, Upload } from 'antd';
 
 const AllProducts = () => {
@@ -8,7 +8,7 @@ const AllProducts = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
-    const [image, setImage] = useState('');
+    const [image, setImage] = useState(null);
 
     const [imageError, setImageError] = useState('');
 
@@ -20,7 +20,7 @@ const AllProducts = () => {
     const handleProductImg = (e) => {
         let selectedFile = e.target.files[0];
         if (selectedFile) {
-            if (selectedFile && types.includes(selectedFile.types)) {
+            if (selectedFile && types.includes(selectedFile.type)) {
                 setImage(selectedFile)
                 setImageError("")
             }
@@ -52,40 +52,44 @@ const AllProducts = () => {
                             onOk={() => setOpen(true)}
                             onCancel={() => setOpen(false)}
                             width={600}
-                        // okText="Submit"
                         >
                             <form onSubmit={handleAddProducts}>
                                 {successMsg && <><br /><div className="error-msg">{successMsg}</div><br /></>}
                                 <br />
                                 <label htmlFor="text"><b>Product Title :</b></label><br />
-                                <Input
+                                {/* <Input
                                     size="large"
                                     placeholder="Enter Product Title"
                                     style={{
                                         width: 300,
                                     }}
                                     rules={[{ required: true }]}
+                                /> */}
+                                <input
+                                    required
+                                    type="text"
+                                    className='form-control'
+                                    placeholder="Enter Product Title"
                                     onChange={(e) => setTitle(e.target.value)} value={title}
                                 />
                                 <br />
                                 <br />
                                 <label htmlFor="text"><b>Product Description :</b></label><br />
-                                <TextArea
+                                <textarea 
+                                    className='form-control'
                                     rows={3}
-                                    size="large"
                                     placeholder="Enter Product Description"
-                                    style={{ width: 300 }}
-                                    rules={[{ required: true }]}
+                                    required
                                     onChange={(e) => setDescription(e.target.value)} value={description}
                                 />
                                 <br />
                                 <br />
                                 <label htmlFor="price"><b>Product Price :</b></label><br />
-                                <InputNumber
-                                    size="large"
+                                <input
+                                    className='form-control'
+                                    required
                                     placeholder="Enter Product Price"
-                                    style={{ width: 300 }}
-                                    rules={[{ required: true }]}
+                                    type="number"
                                     onChange={(e) => setPrice(e.target.value)} value={price}
                                 />
                                 <br />
@@ -95,11 +99,11 @@ const AllProducts = () => {
                                     <Button icon={<UploadOutlined />}>Click to upload product image</Button>
                                 </Upload> */}
                                 <input className="form-control" type="file" id="formFile" onChange={handleProductImg} />
+
+                                {imageError && <><br /><div className="alert-danger p-2">{imageError}</div></>}
+                                {uploadError && <><br /><div className="alert-danger">{uploadError}</div></>}
                                 <br />
-                                <br />
-                                {imageError && <><br /><div className="error-msg">{imageError}</div><br /></>}
-                                {uploadError && <><br /><div className="error-msg">{uploadError}</div><br /></>}
-                                <button type='submit'>Submit</button>
+                                <button className='btn btn-primary' type='submit'>Submit</button>
                             </form>
                         </Modal>
                     </div>
