@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { collection, addDoc, getDocs } from "firebase/firestore";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 // import { UploadOutlined } from "@ant-design/icons"
-import { storage, fs } from '../firebase';
-import { ref } from "firebase/storage";
+import { db } from '../firebase';
+// import { ref } from "firebase/storage";
 import { Button, Modal } from 'antd';
 
 const AllProducts = () => {
@@ -34,36 +36,55 @@ const AllProducts = () => {
             console.log("Please Select Your File");
         }
     }
-    const handleAddProducts = (e) => {
+
+    const storage = getStorage();
+    const handleAddProducts = async (e) => {
         e.preventDefault();
-        // console.log(title, description, price);
-        // console.log(image);
-        const uploadTask = storage.ref(`product-images/${image.name}`).put(image)
+        const productImagesRef = ref(storage, `product-images/${image?.name}`);
+        const uploadTask = uploadBytesResumable(productImagesRef, image);
         uploadTask.on("state_changed", snapshot => {
             const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
             console.log(progress);
-        }, error => setUploadError(error.message), () => {
-            storage.ref("product-images").child(image.name).getDownloadURL().then(url => {
-                fs.collection("Products").add({
+        }, error => setUploadError(error.message), async () => {
+            try {
+                const url = await getDownloadURL(productImagesRef);
+                const docRef = await addDoc(collection(db, "Products"), {
                     title,
                     description,
                     price: Number(price),
                     url
-                }).then(() => {
-                    setSuccessMsg("Product Add Successfully")
-                    setTitle("");
-                    setDescription("");
-                    setPrice("");
-                    document.getElementById("formFile").value = "";
-                    setImageError("");
-                    setUploadError("");
-                    setTimeout(() => {
-                        setSuccessMsg("");
-                    }, 3000)
-                }).catch(error => setUploadError(error.message));
-            })
+                });
+                console.log("Document written with ID: ", docRef.id);
+                setSuccessMsg("Product Add Successfully")
+                setTitle("");
+                setDescription("");
+                setPrice("");
+                document.getElementById("formFile").value = "";
+                setImageError("");
+                setUploadError("");
+                setTimeout(() => {
+                    setSuccessMsg("");
+                }, 3000)
+            } catch (error) {
+                console.error("Error adding document: ", error);
+                setUploadError(error.message)
+            }
         })
     }
+    const [products, setProducts] = useState([]);
+    useEffect(() => {
+        const getProducts = async () => {
+            const productsCollection = collection(db, "Products");
+            const productsSnapshot = await getDocs(productsCollection);
+            const productsList = productsSnapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+            setProducts(productsList);
+        };
+        getProducts();
+    }, []);
+
     return (
         <>
             <div className="container">
@@ -121,6 +142,16 @@ const AllProducts = () => {
                                 <button className='btn btn-primary' type='submit'>Submit</button>
                             </form>
                         </Modal>
+                        <div>
+                            {products.map(product => (
+                                <div key={product.id}>
+                                    <h3>{product.title}</h3>
+                                    <p>{product.description}</p>
+                                    <p>${product.price}</p>
+                                    <img src={product.url} alt="product" />
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>
