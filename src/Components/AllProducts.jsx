@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import "./../App.css";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 // import { UploadOutlined } from "@ant-design/icons"
@@ -142,7 +143,7 @@ const AllProducts = () => {
                                 <button className='btn btn-primary' type='submit'>Submit</button>
                             </form>
                         </Modal>
-                        <div>
+                        <div className='productCard'>
                             {products.map(product => (
                                 <div key={product.id}>
                                     <h3>{product.title}</h3>
