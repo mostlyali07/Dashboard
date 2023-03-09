@@ -143,7 +143,7 @@ const AllProducts = () => {
                                 <button className='btn btn-primary' type='submit'>Submit</button>
                             </form>
                         </Modal>
-                        <div className='productCard'>
+                        <div className="productCard">
                             {products.map(product => (
                                 <div key={product.id}>
                                     <h3>{product.title}</h3>
