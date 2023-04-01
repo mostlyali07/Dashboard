@@ -6,6 +6,7 @@ import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/
 import { db } from '../firebase';
 // import { ref } from "firebase/storage";
 import { Button, Modal } from 'antd';
+import { Header } from "./Header";
 
 const AllProducts = () => {
     const [open, setOpen] = useState(false);
@@ -86,8 +87,10 @@ const AllProducts = () => {
         getProducts();
     }, []);
 
+
     return (
         <>
+            <Header />
             <div className="container">
                 <div className="row">
                     <div className="col-md-12">
@@ -145,14 +148,17 @@ const AllProducts = () => {
                         </Modal>
                         <div className="productCard">
                             {products.map(product => (
-                                <div key={product.id}>
-                                    <h3>{product.title}</h3>
-                                    <p>{product.description}</p>
-                                    <p>${product.price}</p>
+                                <div className="productItem" key={product.id}>
                                     <img src={product.url} alt="product" />
+                                    <div className="productDetails">
+                                        <h3>{product.title}</h3>
+                                        <p>{product.description}</p>
+                                        <p>${product.price}</p>
+                                    </div>
                                 </div>
                             ))}
                         </div>
+
                     </div>
                 </div>
             </div>
