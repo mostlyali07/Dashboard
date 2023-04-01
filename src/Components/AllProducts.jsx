@@ -91,7 +91,8 @@ const AllProducts = () => {
     return (
         <>
             <Header />
-            <div className="container">
+            <br />
+            <div className="container text-center">
                 <div className="row">
                     <div className="col-md-12">
                         <Button type="primary" onClick={() => setOpen(true)}>
