@@ -1,6 +1,7 @@
 * {
   font-family: "Poppins", sans-serif !important;
 }
+
 .MainHome {
   height: 100vh;
   background-color: #fff;
@@ -120,4 +121,64 @@
     height: 260px;
     width: calc(50% - 20px);
   }
+}
+.Main {
+  margin-left: 200px;
+  padding: 0px 10px;
+}
+.sideBar {
+  height: 95%;
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #dedede;
+  border-radius: 26px;
+  overflow-x: hidden;
+}
+
+.logo img {
+  display: block;
+  margin: auto;
+  border-radius: 50%;
+  transition: transform 0.2s ease-in-out;
+}
+.logo img:hover {
+  transform: scale(1.1);
+}
+
+.menu ul {
+  list-style: none;
+  padding: 0;
+}
+.menu li {
+  margin: 0 0 10px 0;
+  transition: transform 0.2s ease-in-out;
+}
+.menu li:hover {
+  transform: translateX(5px);
+}
+.menu li a {
+  display: block;
+  padding: 10px 26px;
+  color: #000;
+  text-decoration: none;
+  border-radius: 26px;
+  transition: background-color 0.2s ease-in-out;
+}
+.menu li a:hover {
+  background-color: #fff;
+  border-radius: 26px;
+}
+
+.logout button {
+  display: block;
+  margin: auto;
+  width: 80%;
+  border-radius: 26px;
+  transition: transform 0.2s ease-in-out;
+}
+.logout button:hover {
+  transform: scale(1.1);
 }

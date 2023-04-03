@@ -6,7 +6,8 @@ import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/
 import { db } from '../firebase';
 // import { ref } from "firebase/storage";
 import { Button, Modal } from 'antd';
-import { Header } from "./Header";
+// import { Header } from "./Header";
+import { Sidebar } from "./Sidebar";
 
 const AllProducts = () => {
     const [open, setOpen] = useState(false);
@@ -90,80 +91,105 @@ const AllProducts = () => {
 
     return (
         <>
-            <Header />
-            <br />
-            <div className="container text-center">
-                <div className="row">
-                    <div className="col-md-12">
-                        <Button type="primary" onClick={() => setOpen(true)}>
-                            Add Product
-                        </Button>
-                        <Modal
-                            title="Add Product Details"
-                            open={open}
-                            onOk={() => setOpen(true)}
-                            onCancel={() => setOpen(false)}
-                            width={600}
-                        >
-                            <form onSubmit={handleAddProducts}>
-                                {successMsg && <><br /><div className="error-msg">{successMsg}</div><br /></>}
-                                <br />
-                                <label htmlFor="text"><b>Product Title :</b></label><br />
-                                <input
-                                    required
-                                    type="text"
-                                    className='form-control'
-                                    placeholder="Enter Product Title"
-                                    onChange={(e) => setTitle(e.target.value)} value={title}
-                                />
-                                <br />
-                                <br />
-                                <label htmlFor="text"><b>Product Description :</b></label><br />
-                                <textarea
-                                    className='form-control'
-                                    rows={3}
-                                    placeholder="Enter Product Description"
-                                    required
-                                    onChange={(e) => setDescription(e.target.value)} value={description}
-                                />
-                                <br />
-                                <br />
-                                <label htmlFor="price"><b>Product Price :</b></label><br />
-                                <input
-                                    className='form-control'
-                                    required
-                                    placeholder="Enter Product Price"
-                                    type="number"
-                                    onChange={(e) => setPrice(e.target.value)} value={price}
-                                />
-                                <br />
-                                <br />
-                                <label htmlFor="image"><b>Product Image :</b></label><br />
-                                <input className="form-control" type="file" id="formFile" onChange={handleProductImg} />
+            {/* <Header /> */}
+                <Sidebar />
+            <div className='Main'>
+                <div className="container text-center">
+                    <div className="row">
+                        <div className="col-md-12">
+                            <Button type="primary" onClick={() => setOpen(true)}>
+                                Add Product
+                            </Button>
+                            <Modal
+                                title="Add Product Details"
+                                open={open}
+                                onOk={() => setOpen(true)}
+                                onCancel={() => setOpen(false)}
+                                width={600}
+                            >
+                                <form onSubmit={handleAddProducts}>
+                                    {successMsg && <><br /><div className="error-msg">{successMsg}</div><br /></>}
+                                    <br />
+                                    <label htmlFor="text"><b>Product Title :</b></label><br />
+                                    <input
+                                        required
+                                        type="text"
+                                        className='form-control'
+                                        placeholder="Enter Product Title"
+                                        onChange={(e) => setTitle(e.target.value)} value={title}
+                                    />
+                                    <br />
+                                    <br />
+                                    <label htmlFor="text"><b>Product Description :</b></label><br />
+                                    <textarea
+                                        className='form-control'
+                                        rows={3}
+                                        placeholder="Enter Product Description"
+                                        required
+                                        onChange={(e) => setDescription(e.target.value)} value={description}
+                                    />
+                                    <br />
+                                    <br />
+                                    <label htmlFor="price"><b>Product Price :</b></label><br />
+                                    <input
+                                        className='form-control'
+                                        required
+                                        placeholder="Enter Product Price"
+                                        type="number"
+                                        onChange={(e) => setPrice(e.target.value)} value={price}
+                                    />
+                                    <br />
+                                    <br />
+                                    <label htmlFor="image"><b>Product Image :</b></label><br />
+                                    <input className="form-control" type="file" id="formFile" onChange={handleProductImg} />
 
-                                {imageError && <><br /><div className="alert-danger p-2">{imageError}</div></>}
-                                {uploadError && <><br /><div className="alert-danger">{uploadError}</div></>}
-                                <br />
-                                <button className='btn btn-primary' type='submit'>Submit</button>
-                            </form>
-                        </Modal>
-                        <div className="productCard">
-                            {products.map(product => (
-                                <div className="productItem" key={product.id}>
-                                    <img src={product.url} alt="product" />
-                                    <div className="productDetails">
-                                        <h3>{product.title}</h3>
-                                        <p>{product.description}</p>
-                                        <p>${product.price}</p>
+                                    {imageError && <><br /><div className="alert-danger p-2">{imageError}</div></>}
+                                    {uploadError && <><br /><div className="alert-danger">{uploadError}</div></>}
+                                    <br />
+                                    <button className='btn btn-primary' type='submit'>Submit</button>
+                                </form>
+                            </Modal>
+                            <div className="productCard">
+                                {products.map(product => (
+                                    <div className="productItem" key={product.id}>
+                                        <img src={product.url} alt="product" />
+                                        <div className="productDetails">
+                                            <h3>{product.title}</h3>
+                                            <p>{product.description}</p>
+                                            <p>${product.price}</p>
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
-                        </div>
+                                ))}
+                            </div>
+                            <div className="productCard">
+                                {products.map(product => (
+                                    <div className="productItem" key={product.id}>
+                                        <img src={product.url} alt="product" />
+                                        <div className="productDetails">
+                                            <h3>{product.title}</h3>
+                                            <p>{product.description}</p>
+                                            <p>${product.price}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="productCard">
+                                {products.map(product => (
+                                    <div className="productItem" key={product.id}>
+                                        <img src={product.url} alt="product" />
+                                        <div className="productDetails">
+                                            <h3>{product.title}</h3>
+                                            <p>{product.description}</p>
+                                            <p>${product.price}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
 
+                        </div>
                     </div>
                 </div>
             </div>
-
         </>
     )
 }
